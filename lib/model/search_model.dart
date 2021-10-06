@@ -5,8 +5,8 @@ import 'package:image_search/model/api_model.dart';
 const searchImageUrl =
     'https://pixabay.com/api/?key=17828481-17c071c7f8eadf406822fada3&q=iphone&image_type=photo';
 
-Future<List<SearchModel>> fetchSearchData(String searchWord) async {
-  final response = await http.get(searchImageUrl + '?iphone=$searchImageUrl');
+Future<List<SearchModel>> fetchSearchData() async {
+  final response = await http.get(searchImageUrl);
   Iterable jsonResponse = convert.jsonDecode(response.body);
   List<SearchModel> searchData =
       jsonResponse.map((e) => SearchModel.fromJson(e)).toList();
