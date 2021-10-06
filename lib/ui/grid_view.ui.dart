@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:image_search/model/api_model.dart';
 
@@ -29,7 +31,33 @@ class GridViewItem extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                Text('{$likes}'),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Row(
+                    children: [
+                      Image.asset("assets\images\like.png"),
+                      Text('{$likes}')
+                    ],
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Row(
+                    children: [
+                      Image.asset("assets\images\bookmark.png"),
+                      Text(tags),
+                    ],
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Row(
+                    children: [
+                      Image.asset("assets\images\bookmark.png"),
+                      Text('{$comments}'),
+                    ],
+                  ),
+                ),
               ],
             ),
           );
