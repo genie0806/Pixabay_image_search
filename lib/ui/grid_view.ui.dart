@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:image_search/model/api_model.dart';
 
 class GridViewItem extends StatelessWidget {
   final int likes;

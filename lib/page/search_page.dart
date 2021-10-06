@@ -2,43 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:image_search/model/api_model.dart';
 import 'package:image_search/model/search_model.dart';
 import 'package:image_search/ui/grid_view.ui.dart';
+import 'package:image_search/ui/search_bar_ui.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchPage extends StatefulWidget {
   const SearchPage({Key key}) : super(key: key);
 
+  @override
+  State<SearchPage> createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
+  final TextEditingController Textcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Image Search Service'),
       ),
-      body: FutureBuilder<List<SearchModel>>(
-          future: fetchSearchData(),
-          initialData: [],
-          builder: (BuildContext context,
-              AsyncSnapshot<List<SearchModel>> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: Image.asset('assets/images/progress.gif'),
-              );
-            }
-            if (snapshot.hasError) {
-              return Text('에러가 발생했습니다.');
-            }
-            if (!snapshot.hasData) {
-              return Text('데어터가 없습니다.');
-            }
-            List<SearchModel> searchData = snapshot.data;
-            return ListView(
-                children: searchData
-                    .map((e) => GridViewItem(
-                          comments: e.comments,
-                          likes: e.likes,
-                          previewURL: e.pageURL,
-                          tags: e.tags,
-                        ))
-                    .toList());
-          }),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 25, 0, 0),
+            child: Row(
+              children: [
+                Searchbar(),
+                Padding(
+                  padding: const EdgeInsets.only(left: 25),
+                  child: InkWell(
+                      onTap: () {
+                        setState(() {});
+                      },
+                      child: Image.asset('assets/images/search.png')),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
