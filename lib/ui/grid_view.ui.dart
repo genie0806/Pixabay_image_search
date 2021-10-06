@@ -24,8 +24,12 @@ class GridViewItem extends StatelessWidget {
             child: Column(
               children: [
                 Container(
-                  child: Image.network(''),
-                )
+                  child: Image.network(
+                    previewURL,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Text('{$likes}'),
               ],
             ),
           );
