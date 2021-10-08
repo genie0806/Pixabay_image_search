@@ -1,4 +1,4 @@
-class SearchModel {
+class Hits {
   int id;
   String pageURL;
   String type;
@@ -22,7 +22,7 @@ class SearchModel {
   String user;
   String userImageURL;
 
-  SearchModel(
+  Hits(
       {this.id,
       this.pageURL,
       this.type,
@@ -46,7 +46,7 @@ class SearchModel {
       this.user,
       this.userImageURL});
 
-  SearchModel.fromJson(Map<String, dynamic> json) {
+  Hits.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     pageURL = json['pageURL'];
     type = json['type'];
