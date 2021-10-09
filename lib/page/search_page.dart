@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_search/model/saerch_data.dart';
 import 'package:image_search/model/search_api.dart';
 import 'package:image_search/model/search_model.dart';
-import 'package:image_search/ui/grid_view.ui.dart';
+import 'package:image_search/ui/card_view.ui.dart';
 import 'package:image_search/ui/search_bar_ui.dart';
 
 class SearchPage extends StatefulWidget {
@@ -20,6 +20,7 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   void dispose() {
+    _searchController.dispose();
     super.dispose();
   }
 
@@ -52,7 +53,7 @@ class _SearchPageState extends State<SearchPage> {
           FutureBuilder<List<Hits>>(
               future: _apiData.fetchSearchData(_searchController.text.isEmpty
                   ? 'iphone'
-                  : _searchController.text),
+                  : _searchController.text.toLowerCase()),
               builder: (context, AsyncSnapshot<List<Hits>> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
@@ -62,12 +63,17 @@ class _SearchPageState extends State<SearchPage> {
                   Text('망했다 이자식아');
                 }
                 final _apiresult = snapshot.data;
-                return Column(
-                    children: _apiresult
-                        .map((e) => GridViewItem(
-                              hits: e,
-                            ))
-                        .toList());
+                return GridView.count(
+                  physics: NeverScrollableScrollPhysics(),
+                  childAspectRatio: 0.85 / 1,
+                  crossAxisCount: 2,
+                  shrinkWrap: true,
+                  children: _apiresult
+                      .map((e) => CardViewItem(
+                            hits: e,
+                          ))
+                      .toList(),
+                );
               }),
         ],
       ),
