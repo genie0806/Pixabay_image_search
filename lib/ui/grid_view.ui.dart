@@ -1,63 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:image_search/model/saerch_data.dart';
 
 class GridViewItem extends StatelessWidget {
-  final int likes;
-  final String tags;
-  final int comments;
-  final String previewURL;
-  const GridViewItem(
-      {Key key, this.likes, this.tags, this.comments, this.previewURL})
-      : super(key: key);
+  final Hits hits;
+
+  const GridViewItem({Key key, this.hits}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 1 / 1,
-          mainAxisSpacing: 30,
-          crossAxisSpacing: 30,
-        ),
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            child: Column(
-              children: [
-                Container(
-                  child: Image.network(
-                    previewURL,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Row(
-                    children: [
-                      Image.asset("assets\images\like.png"),
-                      Text('{$likes}')
-                    ],
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Row(
-                    children: [
-                      Image.asset("assets\images\bookmark.png"),
-                      Text(tags),
-                    ],
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Row(
-                    children: [
-                      Image.asset("assets\images\bookmark.png"),
-                      Text('{$comments}'),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          );
-        });
+    return GridView.count(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      crossAxisCount: 2,
+      children: [
+        Container(
+          child: Image.network(
+            hits.previewURL,
+            fit: BoxFit.cover,
+            width: 100,
+            height: 100,
+          ),
+        )
+      ],
+    );
   }
 }

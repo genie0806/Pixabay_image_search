@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Searchbar extends StatelessWidget {
-  final TextEditingController Textcontroller;
+  final TextEditingController Controller;
   final void Function() onTap;
-  const Searchbar({Key key, this.Textcontroller, this.onTap}) : super(key: key);
+  const Searchbar({Key key, this.Controller, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class Searchbar extends StatelessWidget {
       height: 50,
       child: TextField(
         cursorColor: Colors.blue,
-        controller: Textcontroller,
+        controller: Controller,
         decoration: InputDecoration(
           labelText: 'Search Image',
           hintText: '이미지 검색',
