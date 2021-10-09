@@ -9,6 +9,7 @@ class CardViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var _query = '';
     return Column(
       children: [
         Card(
@@ -63,7 +64,7 @@ class CardViewItem extends StatelessWidget {
                       ),
                       Expanded(
                         child: Text(
-                          hits.tags,
+                          hits.tags.toLowerCase(),
                           softWrap: true,
                         ),
                       )
