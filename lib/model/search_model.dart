@@ -14,6 +14,6 @@ class PixaBayApi {
       SearchModel searchdata = SearchModel.fromJson(jsonResponse);
       return searchdata.hits;
     }
-    throw Exception('Response\'s statusCode is not 200');
+    throw Exception('statusCode is not 200');
   }
 }

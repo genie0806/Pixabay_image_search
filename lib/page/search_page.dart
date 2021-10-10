@@ -17,6 +17,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final _apiData = PixaBayApi();
   final _searchController = TextEditingController();
+  var _query = '';
 
   @override
   void dispose() {
@@ -38,8 +39,12 @@ class _SearchPageState extends State<SearchPage> {
             child: Row(
               children: [
                 Searchbar(
-                  Controller: _searchController,
-                ),
+                    Controller: _searchController,
+                    onChanged: (query) {
+                      setState(() {
+                        query = _query;
+                      });
+                    }),
                 Expanded(
                   child: InkWell(
                       onTap: () {
@@ -53,7 +58,7 @@ class _SearchPageState extends State<SearchPage> {
           FutureBuilder<List<Hits>>(
               future: _apiData.fetchSearchData(_searchController.text.isEmpty
                   ? 'iphone'
-                  : _searchController.text.toLowerCase()),
+                  : _searchController.text),
               builder: (context, AsyncSnapshot<List<Hits>> snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
@@ -64,16 +69,18 @@ class _SearchPageState extends State<SearchPage> {
                 }
                 final _apiresult = snapshot.data;
                 return GridView.count(
-                  physics: NeverScrollableScrollPhysics(),
-                  childAspectRatio: 0.85 / 1,
-                  crossAxisCount: 2,
-                  shrinkWrap: true,
-                  children: _apiresult
-                      .map((e) => CardViewItem(
-                            hits: e,
-                          ))
-                      .toList(),
-                );
+                    physics: NeverScrollableScrollPhysics(),
+                    childAspectRatio: 0.85 / 1,
+                    crossAxisCount: 2,
+                    shrinkWrap: true,
+                    children: _apiresult
+                        .where((e) => e.tags
+                            .toLowerCase()
+                            .contains(_query.trim().toLowerCase()))
+                        .map((e) => CardViewItem(
+                              hit: e,
+                            ))
+                        .toList());
               }),
         ],
       ),
