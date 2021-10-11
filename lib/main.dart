@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_search/page/search_page.dart';
+import 'package:image_search/ui/detail_page.dart';
 
 void main() {
   runApp(const ImageSearch());

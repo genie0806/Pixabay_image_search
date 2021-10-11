@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:image_search/model/saerch_data.dart';
+import 'package:image_search/ui/detail_page.dart';
 
 class CardViewItem extends StatelessWidget {
-  final Hits hits;
-  final itemCount;
+  final Hits hit;
+  final void Function() onTap;
 
-  const CardViewItem({Key key, this.hits, this.itemCount}) : super(key: key);
+  const CardViewItem({Key key, this.hit, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var _query = '';
     return Column(
       children: [
-        Card(
-          child: Image.network(
-            hits.previewURL,
-            fit: BoxFit.fill,
-            width: 150,
-            height: 150,
-          ),
-        ),
+        InkWell(
+            child: Card(
+              child: Image.network(
+                hit.previewURL,
+                fit: BoxFit.fill,
+                width: 150,
+                height: 150,
+              ),
+            ),
+            onTap: onTap),
         Padding(
           padding: const EdgeInsets.only(top: 8),
           child: Column(
@@ -28,15 +30,18 @@ class CardViewItem extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      "assets/images/like.png",
-                      width: 20,
-                      height: 20,
+                    InkWell(
+                      onTap: onTap,
+                      child: Image.asset(
+                        "assets/images/like.png",
+                        width: 20,
+                        height: 20,
+                      ),
                     ),
                     SizedBox(
                       width: 5,
                     ),
-                    Text(hits.likes.toString()),
+                    Text(hit.likes.toString()),
                     SizedBox(
                       width: 20,
                     ),
@@ -48,7 +53,7 @@ class CardViewItem extends StatelessWidget {
                     SizedBox(
                       width: 5,
                     ),
-                    Text(hits.comments.toString()),
+                    Text(hit.comments.toString()),
                   ],
                 ),
               ),
@@ -64,7 +69,7 @@ class CardViewItem extends StatelessWidget {
                       ),
                       Expanded(
                         child: Text(
-                          hits.tags.toLowerCase(),
+                          hit.tags,
                           softWrap: true,
                         ),
                       )

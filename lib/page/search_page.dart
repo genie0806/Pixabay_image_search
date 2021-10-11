@@ -1,10 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:image_search/model/saerch_data.dart';
 import 'package:image_search/model/search_api.dart';
 import 'package:image_search/model/search_model.dart';
 import 'package:image_search/ui/card_view.ui.dart';
+import 'package:image_search/ui/detail_page.dart';
 import 'package:image_search/ui/search_bar_ui.dart';
 
 class SearchPage extends StatefulWidget {
@@ -56,6 +55,7 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
           FutureBuilder<List<Hits>>(
+              initialData: [],
               future: _apiData.fetchSearchData(_searchController.text.isEmpty
                   ? 'iphone'
                   : _searchController.text),
@@ -79,6 +79,15 @@ class _SearchPageState extends State<SearchPage> {
                             .contains(_query.trim().toLowerCase()))
                         .map((e) => CardViewItem(
                               hit: e,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        DetailPage(detailData: e),
+                                  ),
+                                );
+                              },
                             ))
                         .toList());
               }),
