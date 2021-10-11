@@ -12,7 +12,7 @@ class DetailPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(detailData.tags),
       ),
-      body: Column(
+      body: ListView(
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 40),
