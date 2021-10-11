@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_search/model/saerch_data.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailPage extends StatelessWidget {
   final Hits detailData;
@@ -47,6 +48,17 @@ class DetailPage extends StatelessWidget {
                   'commnets : ' + detailData.comments.toString(),
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
+                ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.amber)),
+                  onPressed: () {
+                    launch(detailData.pageURL);
+                  },
+                  child: Text(
+                    'Go to Website Image',
+                    style: TextStyle(color: Colors.black, fontSize: 20),
+                  ),
+                ),
               ],
             ),
           )
@@ -55,13 +67,9 @@ class DetailPage extends StatelessWidget {
     );
   }
 
-  Padding paddingText(String contentText) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 15, 175, 0),
-      child: Text(
-        contentText,
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-      ),
-    );
+  void lauchUrl(String url) async {
+    await canLaunch(detailData.pageURL)
+        ? await launch(detailData.pageURL)
+        : throw 'could not launch${detailData.pageURL}';
   }
 }
