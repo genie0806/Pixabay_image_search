@@ -10,7 +10,7 @@ class Searchbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 300,
+      //width: 400,
       height: 50,
       child: TextField(
         onChanged: onChanged,

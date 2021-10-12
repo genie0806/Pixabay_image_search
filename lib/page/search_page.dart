@@ -33,23 +33,26 @@ class _SearchPageState extends State<SearchPage> {
       body: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+            padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
             child: Row(
               children: [
-                Searchbar(
-                    Controller: _searchController,
-                    onChanged: (query) {
-                      setState(() {
-                        query = _query;
-                      });
-                    }),
                 Expanded(
-                  child: InkWell(
-                      onTap: () {
-                        setState(() {});
-                      },
-                      child: Image.asset('assets/images/search.png')),
+                  child: Searchbar(
+                      Controller: _searchController,
+                      onChanged: (query) {
+                        setState(() {
+                          query = _query;
+                        });
+                      }),
                 ),
+                InkWell(
+                    onTap: () {
+                      setState(() {});
+                    },
+                    child: SizedBox(
+                        height: 50,
+                        width: 50,
+                        child: Image.asset('assets/images/search.png'))),
               ],
             ),
           ),
@@ -64,7 +67,7 @@ class _SearchPageState extends State<SearchPage> {
                       child: Image.asset('assets/images/progress.gif'));
                 }
                 if (snapshot.hasError) {
-                  Text('망했다 이자식아');
+                  Text('망했다 에러다');
                 }
                 final _apiresult = snapshot.data;
                 return GridView.count(

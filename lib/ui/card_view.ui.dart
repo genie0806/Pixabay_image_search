@@ -56,25 +56,19 @@ class CardViewItem extends StatelessWidget {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
-                child: Center(
-                  child: Row(
-                    children: [
-                      Image.asset(
-                        "assets/images/bookmark.png",
-                        width: 20,
-                        height: 20,
-                      ),
-                      Expanded(
-                        child: Text(
-                          hit.tags,
-                          softWrap: true,
-                        ),
-                      )
-                    ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    "assets/images/bookmark.png",
+                    width: 20,
+                    height: 20,
                   ),
-                ),
+                  Text(
+                    hit.tags,
+                    softWrap: true,
+                  )
+                ],
               ),
             ],
           ),

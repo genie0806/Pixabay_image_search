@@ -1,4 +1,4 @@
-# image_search
+# Image Search app
 
 A new Flutter project.
 
