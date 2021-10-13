@@ -6,7 +6,7 @@ import 'package:image_search/ui/detail_page.dart';
 import 'package:image_search/ui/search_bar_ui.dart';
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({Key key}) : super(key: key);
+  const SearchPage({Key? key}) : super(key: key);
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -75,7 +75,7 @@ class _SearchPageState extends State<SearchPage> {
                     childAspectRatio: 0.85 / 1,
                     crossAxisCount: 2,
                     shrinkWrap: true,
-                    children: _apiresult
+                    children: _apiresult!
                         .where((e) => e.tags
                             .toLowerCase()
                             .contains(_query.trim().toLowerCase()))
