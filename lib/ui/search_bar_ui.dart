@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 
 class Searchbar extends StatelessWidget {
-  final TextEditingController Controller;
-  final void Function() onTap;
+  final TextEditingController controller;
   final void Function(String) onChanged;
-  const Searchbar({Key key, this.Controller, this.onTap, this.onChanged})
+  const Searchbar({Key? key, required this.controller, required this.onChanged})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       //width: 400,
       height: 50,
       child: TextField(
         onChanged: onChanged,
         cursorColor: Colors.blue,
-        controller: Controller,
-        decoration: InputDecoration(
+        controller: controller,
+        decoration: const InputDecoration(
           labelText: 'Search Image',
           hintText: '이미지 검색',
           labelStyle: TextStyle(fontSize: 20, color: Colors.black),

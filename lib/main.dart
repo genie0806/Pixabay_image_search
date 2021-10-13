@@ -6,11 +6,11 @@ void main() {
 }
 
 class ImageSearch extends StatelessWidget {
-  const ImageSearch({Key key}) : super(key: key);
+  const ImageSearch({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Image Search',
       home: SearchPage(),
     );

@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 class DetailPage extends StatelessWidget {
   final Hits detailData;
 
-  const DetailPage({Key key, this.detailData}) : super(key: key);
+  const DetailPage({Key? key, required this.detailData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class DetailPage extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 40),
-            child: Container(
+            child: SizedBox(
               child: Image.network(detailData.webformatURL),
               width: 450,
               height: 450,
@@ -30,23 +30,28 @@ class DetailPage extends StatelessWidget {
               children: [
                 Text(
                   'UserName : ' + detailData.user,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 Text(
                   'View : ' + detailData.views.toString(),
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 Text(
                   'Likes : ' + detailData.likes.toString(),
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 Text(
                   'DownLoads : ' + detailData.downloads.toString(),
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 Text(
                   'commnets : ' + detailData.comments.toString(),
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 ElevatedButton(
                   style: ButtonStyle(
@@ -54,7 +59,7 @@ class DetailPage extends StatelessWidget {
                   onPressed: () {
                     launch(detailData.pageURL);
                   },
-                  child: Text(
+                  child: const Text(
                     'Go to Website Image',
                     style: TextStyle(color: Colors.black, fontSize: 20),
                   ),

@@ -5,7 +5,8 @@ class CardViewItem extends StatelessWidget {
   final Hits hit;
   final void Function() onTap;
 
-  const CardViewItem({Key key, this.hit, this.onTap}) : super(key: key);
+  const CardViewItem({Key? key, required this.hit, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,36 +26,34 @@ class CardViewItem extends StatelessWidget {
           padding: const EdgeInsets.only(top: 8),
           child: Column(
             children: [
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InkWell(
-                      onTap: onTap,
-                      child: Image.asset(
-                        "assets/images/like.png",
-                        width: 20,
-                        height: 20,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(hit.likes.toString()),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Image.asset(
-                      "assets/images/comment.png",
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: onTap,
+                    child: Image.asset(
+                      "assets/images/like.png",
                       width: 20,
                       height: 20,
                     ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(hit.comments.toString()),
-                  ],
-                ),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(hit.likes.toString()),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Image.asset(
+                    "assets/images/comment.png",
+                    width: 20,
+                    height: 20,
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(hit.comments.toString()),
+                ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
