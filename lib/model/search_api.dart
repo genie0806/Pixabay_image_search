@@ -14,7 +14,7 @@ class SearchModel {
     if (json['hits'] != null) {
       hits = [];
       json['hits'].forEach((v) {
-        hits.add(new Hits.fromJson(v));
+        hits.add(Hits.fromJson(v));
       });
     }
   }
