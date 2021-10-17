@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'hits.g.dart';
+part 'search.g.dart';
 
 @JsonSerializable()
 class Hits {
