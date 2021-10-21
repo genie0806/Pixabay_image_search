@@ -15,7 +15,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final _apiData = PixaBayApi();
   final _searchController = TextEditingController();
-  var _query = '';
+  final _query = '';
 
   @override
   void dispose() {
@@ -28,7 +28,7 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Image Search Service'),
+        title: const Text('Image Search Service'),
       ),
       body: ListView(
         children: [
@@ -38,7 +38,7 @@ class _SearchPageState extends State<SearchPage> {
               children: [
                 Expanded(
                   child: Searchbar(
-                      Controller: _searchController,
+                      controller: _searchController,
                       onChanged: (query) {
                         setState(() {
                           query = _query;
@@ -57,7 +57,7 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
           FutureBuilder<List<Hits>>(
-              initialData: [],
+              initialData: const [],
               future: _apiData.fetchSearchData(_searchController.text.isEmpty
                   ? 'iphone'
                   : _searchController.text),
@@ -67,11 +67,11 @@ class _SearchPageState extends State<SearchPage> {
                       child: Image.asset('assets/images/progress.gif'));
                 }
                 if (snapshot.hasError) {
-                  Text('망했다 에러다');
+                  const Text('망했다 에러다');
                 }
                 final _apiresult = snapshot.data;
                 return GridView.count(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     childAspectRatio: 0.85 / 1,
                     crossAxisCount: 2,
                     shrinkWrap: true,
