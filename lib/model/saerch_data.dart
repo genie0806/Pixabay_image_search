@@ -21,7 +21,7 @@ class Hits {
   late int userId;
   late String user;
   late String userImageURL;
-
+  late String result;
   Hits(
       {required this.id,
       required this.pageURL,

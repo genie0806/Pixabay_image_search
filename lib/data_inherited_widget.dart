@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:image_search/view_model.dart/pixabay_view_model.dart';
 
 class ApiInheritedWidget extends InheritedWidget {
-  final PixabayViewModel viewModel;
+  final PixabayApiViewModel viewModel;
 
   const ApiInheritedWidget(
       {Key? key, required this.viewModel, required Widget child})
