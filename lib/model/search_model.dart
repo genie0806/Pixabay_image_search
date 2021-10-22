@@ -15,5 +15,5 @@ class PixaBayApi {
     }
     throw Exception('statusCode is not 200');
   }
-}// MVVM 패턴에서 얘가 모델,
+}// MVVM 패턴에서 모델,
 
