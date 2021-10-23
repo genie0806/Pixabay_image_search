@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_search/model/saerch_data.dart';
+import 'package:image_search/view_model.dart/pixabay_view_model.dart';
 
 class CardViewItem extends StatelessWidget {
   final Hits hit;

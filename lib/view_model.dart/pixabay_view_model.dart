@@ -1,17 +1,16 @@
-import 'dart:async';
-
+import 'package:flutter/material.dart';
 import 'package:image_search/model/search_api.dart';
 import 'package:image_search/model/search_model.dart';
 
-class PixabayApiViewModel {
-  final _api = PixaBayApi();
-  final _streamController = StreamController<SearchModel>();
+class PixabayApiViewModel with ChangeNotifier {
+  final _api = SearchApi();
+  SearchModel? _apiResult;
+  SearchModel? get apiResult => _apiResult;
 
-  Stream<SearchModel> get apiStream => _streamController.stream;
-
-  void fetch(String keyword) {
-    _api.fetchSearchData(keyword).then((result) {
-      _streamController.add(result);
+  void fetchResult(String searchWord) {
+    _api.fetchSearchData(searchWord).then((result) {
+      _apiResult = result;
     });
+    notifyListeners();
   }
 }
