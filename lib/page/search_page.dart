@@ -72,25 +72,29 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Widget imageResultView(PixabayApiViewModel viewModel, BuildContext context) {
-    return GridView.count(
-        physics: const NeverScrollableScrollPhysics(),
-        childAspectRatio: 0.85 / 1,
-        crossAxisCount: 2,
-        shrinkWrap: true,
-        children: viewModel.result!.hits
-            .where((e) =>
-                e.tags.toLowerCase().contains(_query.trim().toLowerCase()))
-            .map((e) => CardViewItem(
-                  hit: e,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => DetailPage(detailData: e),
-                      ),
-                    );
-                  },
-                ))
-            .toList());
+    if (viewModel.result != null) {
+      return GridView.count(
+          physics: const NeverScrollableScrollPhysics(),
+          childAspectRatio: 0.85 / 1,
+          crossAxisCount: 2,
+          shrinkWrap: true,
+          children: viewModel.result!.hits
+              .where((e) =>
+                  e.tags.toLowerCase().contains(_query.trim().toLowerCase()))
+              .map((e) => CardViewItem(
+                    hit: e,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailPage(detailData: e),
+                        ),
+                      );
+                    },
+                  ))
+              .toList());
+    } else {
+      return const Center(child: CircularProgressIndicator());
+    }
   }
 }

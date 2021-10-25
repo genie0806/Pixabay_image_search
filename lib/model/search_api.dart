@@ -1,6 +1,6 @@
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
-import 'package:image_search/model/search.model.dart';
+import 'package:image_search/model/search_model.dart';
 
 class SearchApi {
   static const baseUrl = 'https://pixabay.com/api/';

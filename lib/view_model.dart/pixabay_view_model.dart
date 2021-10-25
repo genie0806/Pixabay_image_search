@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:image_search/model/search.model.dart';
 import 'package:image_search/model/search_api.dart';
+import 'package:image_search/model/search_model.dart';
 
 class PixabayApiViewModel extends ChangeNotifier {
   final _api = SearchApi();
