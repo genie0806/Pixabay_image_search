@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_search/page/search_page.dart';
+import 'package:image_search/view_model.dart/pixabay_view_model.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const ImageSearch());
@@ -10,9 +12,11 @@ class ImageSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Image Search',
-      home: SearchPage(),
-    );
+    return MaterialApp(
+        title: 'Image Search',
+        home: ChangeNotifierProvider(
+          create: (_) => PixabayApiViewModel(),
+          child: const SearchPage(),
+        ));
   }
 }

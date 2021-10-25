@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:image_search/model/saerch_data.dart';
-import 'package:image_search/model/search_model.dart';
 import 'package:image_search/ui/card_view.ui.dart';
 import 'package:image_search/ui/detail_page.dart';
 import 'package:image_search/ui/search_bar_ui.dart';
+import 'package:image_search/view_model.dart/pixabay_view_model.dart';
+import 'package:provider/provider.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -13,9 +13,16 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  final _apiData = PixaBayApi();
   final _searchController = TextEditingController();
   final _query = '';
+
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      context.read<PixabayApiViewModel>().fetschResult('iphone');
+    });
+  }
 
   @override
   void dispose() {
@@ -24,8 +31,8 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   @override
-  @override
   Widget build(BuildContext context) {
+    final viewModel = Provider.of<PixabayApiViewModel>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Image Search Service'),
@@ -47,7 +54,9 @@ class _SearchPageState extends State<SearchPage> {
                 ),
                 InkWell(
                     onTap: () {
-                      setState(() {});
+                      setState(() {
+                        viewModel.fetschResult(_searchController.text);
+                      });
                     },
                     child: SizedBox(
                         height: 50,
@@ -56,45 +65,32 @@ class _SearchPageState extends State<SearchPage> {
               ],
             ),
           ),
-          FutureBuilder<List<Hits>>(
-              initialData: const [],
-              future: _apiData.fetchSearchData(_searchController.text.isEmpty
-                  ? 'iphone'
-                  : _searchController.text),
-              builder: (context, AsyncSnapshot<List<Hits>> snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                      child: Image.asset('assets/images/progress.gif'));
-                }
-                if (snapshot.hasError) {
-                  const Text('망했다 에러다');
-                }
-                final _apiresult = snapshot.data;
-                return GridView.count(
-                    physics: const NeverScrollableScrollPhysics(),
-                    childAspectRatio: 0.85 / 1,
-                    crossAxisCount: 2,
-                    shrinkWrap: true,
-                    children: _apiresult!
-                        .where((e) => e.tags
-                            .toLowerCase()
-                            .contains(_query.trim().toLowerCase()))
-                        .map((e) => CardViewItem(
-                              hit: e,
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        DetailPage(detailData: e),
-                                  ),
-                                );
-                              },
-                            ))
-                        .toList());
-              }),
+          imageResultView(viewModel, context)
         ],
       ),
     );
+  }
+
+  Widget imageResultView(PixabayApiViewModel viewModel, BuildContext context) {
+    return GridView.count(
+        physics: const NeverScrollableScrollPhysics(),
+        childAspectRatio: 0.85 / 1,
+        crossAxisCount: 2,
+        shrinkWrap: true,
+        children: viewModel.result!.hits
+            .where((e) =>
+                e.tags.toLowerCase().contains(_query.trim().toLowerCase()))
+            .map((e) => CardViewItem(
+                  hit: e,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailPage(detailData: e),
+                      ),
+                    );
+                  },
+                ))
+            .toList());
   }
 }
