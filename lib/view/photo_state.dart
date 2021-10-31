@@ -6,6 +6,5 @@ part 'photo_state.freezed.dart';
 
 @freezed
 class PhotoState with _$PhotoState {
-  factory PhotoState({SearchModel? searchModel}) = _PhotoState;
-
+  factory PhotoState({SearchModel searchModel}) = _PhotoState;
 }
