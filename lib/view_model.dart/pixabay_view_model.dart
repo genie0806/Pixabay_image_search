@@ -1,16 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:image_search/model/search_api.dart';
-import 'package:image_search/model/search_model.dart';
+import 'package:image_search/view/photo_state.dart';
 
 class PixabayApiViewModel extends ChangeNotifier {
   final _api = SearchApi();
-  SearchModel? _searchModel;
-  SearchModel? get result => _searchModel;
+  PhotoState _state = PhotoState();
+  PhotoState get state => _state;
 
-  void fetschResult(String searchWord) {
-    _api.fetchSearchData(searchWord).then((result) {
-      _searchModel = result;
-      notifyListeners();
-    });
+  Future<void> fetschResult(String searchWord) async {
+    final result = await _api.fetchSearchData(searchWord);
+    _state = _state.copyWith(searchModel: result);
+
+    notifyListeners();
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:image_search/ui/card_view.ui.dart';
-import 'package:image_search/ui/detail_page.dart';
-import 'package:image_search/ui/search_bar_ui.dart';
+import 'package:image_search/widget/card_view.ui.dart';
+import 'package:image_search/widget/detail_page.dart';
+import 'package:image_search/widget/search_bar_ui.dart';
 import 'package:image_search/view_model.dart/pixabay_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -72,13 +72,13 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   Widget imageResultView(PixabayApiViewModel viewModel, BuildContext context) {
-    if (viewModel.result != null) {
+    if (viewModel.state.searchModel != null) {
       return GridView.count(
           physics: const NeverScrollableScrollPhysics(),
           childAspectRatio: 0.85 / 1,
           crossAxisCount: 2,
           shrinkWrap: true,
-          children: viewModel.result!.hits
+          children: viewModel.state.searchModel!.hits
               .where((e) =>
                   e.tags.toLowerCase().contains(_query.trim().toLowerCase()))
               .map((e) => CardViewItem(
